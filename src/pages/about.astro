@@ -10,30 +10,28 @@ const meta = {
 <PageLayout meta={meta}>
 
 	<h1 class="title mb-6">About</h1>
-	<div class="prose prose-citrus max-w-none">
-		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
-		</p>
-		<p>Here are my some of my awesome built in features:</p>
-		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
-		</ul>
-		<p>
-			Clone or fork my <a
-				aria-label="github repository"
-				class="citrus-link inline-block"
-				href="https://github.com/artemkutsan/astro-citrus"
-				rel="noreferrer"
-				target="_blank">repo</a
-			> if you like me!
-		</p>
-	</div>
+  <div class="w-full bg-cardBg rounded-xl z-10 flex flex-col md:flex-row gap-6">
+    <div class="col-span-4 md:col-span-12">
+      <img src="/images/avatar.jpg" alt="筆力" class="rounded-md" />
+    </div>
+    <div class="col-span-8 md:col-span-12 text-justify">
+      <p class="text-gray-300">
+        哈囉，我是筆力。<br />
+        首先想做個介紹，為什麼我會建立這個 Blog？然後開始寫些文章？
+      </p>
+      <p class="mt-4 text-gray-300">
+        主要是在兩年多前，我經歷了一些意外，在打完疫苗之後，身體開始產生了一些奇奇怪怪的疑難雜症，而會用到奇怪這兩個字，是因為在科學的儀器上檢查不出原因，而自己那不舒服的感覺也說不上來，但就是相當不適。<br />
+        這段時間中，我經歷了許多負面的心情，一個接著一個來的關卡，剛開始有好多的夜晚我無法好好入睡，在想著該怎麼辦？這些不舒服是怎麼回事？下一步該怎麼做？為什麼會遇到這種鳥事……甚至在有些時候，都會覺得狀況即將要失控。在這樣內心不斷地懷疑、衝撞、嘗試之中，加上家人朋友以及一些新朋友的支持，我學習跟體悟到了很多，開始能理解從「負面事件去看待正面的意義」以及「為了經驗之故，因愛而創造」。如果沒有這樣的事件，我也沒有機會去動搖那頑固的習氣、言行舉止，然後開始重新調整人生各個層面。
+      </p>
+      <p class="mt-4 text-gray-300">
+        在這個過程中，我一直有想要分享的動機。不過一直到了近期，隨著身體不斷好轉也更進一步的探索跟回顧，像是更多地去探索我是誰？有什麼特質？不想做什麼？做什麼會覺得開心？過去被什麼習氣影響……，在這樣種種的探索跟回顧，以及一些事件的衝擊，我開始更確定自己的一些大方向規劃，以及想做什麼事情，可能想往什麼方向走，而其中一個部分就是透過文字，將自己的經驗、學習轉化並且分享出來。<br />
+        預計分享的內容，像是在這疑難雜症的經驗中所帶來的體悟，以及所做的一些學習心得。最近在研究習慣、心念、大腦等等相關領域，也有閱讀一些身心靈書籍跟阿育吠陀等知識。如果這些分享能為你帶來一些小小心得，也歡迎給我一些回饋。
+      </p>
+      <p class="mt-4 text-gray-300">
+        （目前我的狀況已經好上許多，距離回到正常的生活型態只剩下一個關卡，而這個關卡的突破，我知道是遲早的事情，只需要再一些時間！）<br />
+      </p>
+      <p class="mt-2 text-right text-gray-300">2024.08.06 記</p>
+    </div>
+  </div>
 
 </PageLayout>
