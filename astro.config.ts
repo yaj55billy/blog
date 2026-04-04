@@ -114,7 +114,7 @@ export default defineConfig({
 	},
 	redirects: {
 		"/notes/": "/essays/",
-		"/notes/[slug]/": "/essays/[slug]/",
+		"/notes/[...slug]": "/essays/[...slug]",
 		"/notes/rss.xml": "/essays/rss.xml",
 	},
 	// https://docs.astro.build/en/guides/prefetch/
