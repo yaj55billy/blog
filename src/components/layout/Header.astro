@@ -33,11 +33,11 @@ import { Icon } from "astro-icon/components";
 				href="/"
 			>	
 				<!-- Logo -->
-				<div title={siteConfig.title} class="w-16">
+				<!-- <div title={siteConfig.title} class="w-16">
           <img src="/images/logo.png" alt="探索與記錄的產地">
-				</div>
+				</div> -->
 				
-				<strong class="'max-[320px]:hidden' text-white  z-10 mb-0.5 ms-2 text-xl md:text-2xl ">
+				<strong class="'max-[320px]:hidden' text-accent-base z-10 mb-0.5 ms-2 text-xl md:text-2xl ">
 					{siteConfig.title}
 				</strong>
 			</a>
@@ -76,7 +76,7 @@ import { Icon } from "astro-icon/components";
 					menuLinks.map((link) => (
 						<a
 							aria-current={Astro.url.pathname === link.path ? "page" : false}
-							class="underline-offset-2 hover:underline"
+							class="underline-offset-2 hover:underline font-semibold text-base"
 							data-astro-prefetch
 							href={link.path}
 						>

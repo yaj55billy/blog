@@ -1,129 +1,92 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import SocialList from "@/components/SocialList.astro";
+import { type CollectionEntry } from "astro:content";
 import PostPreview from "@/components/blog/PostPreview.astro";
-import Note from "@/components/note/Note.astro";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
+import { Icon } from "astro-icon/components";
 
 // Posts
-const MAX_POSTS = 10;
+const MAX_POSTS = 3;
 const allPosts = await getAllPosts();
 const allPostsByDate = allPosts
 	.sort(collectionDateSort)
 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
-
-// Notes
-const MAX_NOTES = 2;
-const allNotes = await getCollection("note");
-const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<!-- Hero section -->
-	<!-- Background blur -->
-	<div class="absolute top-0 left-1/2 md:top-[-15%] -ml-[50vw] min-h-screen w-screen pointer-events-none blur-3xl opacity-50 overflow-x-hidden">
-		<div class="absolute top-[10%] right-[-40%] w-[65%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-30 dark:opacity-10"></div>
-		<div class="absolute top-[10%] left-[-40%] w-[65%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-30 dark:opacity-10"></div>
-		<div class="absolute top-[-20%] left-[-50%] w-[85%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-60 dark:opacity-10"></div>
-		<div class="absolute top-[-20%] right-[-50%] w-[85%] h-full bg-gradient-to-b from-orange-300 via-indigo-300 to-transparent rounded-full opacity-60 dark:opacity-10"></div>
-	</div>
-	<!-- <section class="max-w-xl mx-auto relative flex items-center justify-center h-screen -mt-24">
-		<div class="w-full text-center">
-			<span class="title text-3xl bg-gradient-to-r from-accent-two/85 via-accent-one/85 to-accent-two/85 dark:from-accent-two dark:via-accent-one dark:to-accent-two bg-clip-text text-transparent">
-				Introducing Astro Citrus!
-			</span>
-			<p class="mt-4 mb-4 text-lg font-medium">
-				Hi, I’m an Astro theme for building websites or blogs. To customize, add posts, or make it yours, click the GitHub icon below to visit my repo.
-			</p>
-			<div class="flex justify-center mb-4">
-				<SocialList />
-			</div>
-			<div class="flex justify-center space-x-4 mt-4">
-				<a href="/posts/" class="relative flex items-center justify-center h-8 px-4 rounded-lg shadow-lg hover:brightness-110 transition-all bg-gradient-to-r from-accent-one to-accent-two">
-					<span class="text-bgColor font-semibold">
-						Read Blog
-					</span>
-				</a>
+	<!-- Hero Section -->
+	<section class="mb-16">
+		<div class="flex flex-col sm:flex-row-reverse gap-8 items-start">
+			<!-- Avatar -->
+			<img
+				src="/images/logo.png"
+				alt="圓臉助教"
+				class="rounded-xl w-36 h-36 sm:w-48 sm:h-48 object-cover flex-shrink-0"
+			/>
 
-				<a href="/notes/wake-up/" class="relative flex items-center justify-center h-8 px-4 rounded-lg shadow-lg bg-special-lighter hover:brightness-110 hover:bg-special-lightest">
-					<span class="bg-clip-text text-transparent font-semibold bg-gradient-to-r from-accent-one to-accent-two">
-						Wake up
-					</span>
-				</a>
+			<!-- Bio -->
+			<div class="flex-1 min-w-0">
+				<h1 class="title text-2xl mb-4">哈囉，我是圓臉助教</h1>
+				<div class="space-y-3 leading-relaxed">
+					<p>
+						首先想做個介紹，為什麼我會建立這個 Blog？然後開始寫些文章？
+					</p>
+					<p>
+						主要是在兩年多前，我經歷了一些意外，在打完疫苗之後，身體開始產生了一些奇奇怪怪的疑難雜症，而會用到奇怪這兩個字，是因為在科學的儀器上檢查不出原因，而自己那不舒服的感覺也說不上來，但就是相當不適。<br />
+						這段時間中，我經歷了許多負面的心情，一個接著一個來的關卡，剛開始有好多的夜晚我無法好好入睡，在想著該怎麼辦？這些不舒服是怎麼回事？下一步該怎麼做？為什麼會遇到這種鳥事……甚至在有些時候，都會覺得狀況即將要失控。在這樣內心不斷地懷疑、衝撞、嘗試之中，加上家人朋友以及一些新朋友的支持，我學習跟體悟到了很多，開始能理解從「負面事件去看待正面的意義」以及「為了經驗之故，因愛而創造」。如果沒有這樣的事件，我也沒有機會去動搖那頑固的習氣、言行舉止，然後開始重新調整人生各個層面。
+					</p>
+					<p>
+						在這個過程中，我一直有想要分享的動機。不過一直到了近期，隨著身體不斷好轉也更進一步的探索跟回顧，像是更多地去探索我是誰？有什麼特質？不想做什麼？做什麼會覺得開心？過去被什麼習氣影響……，在這樣種種的探索跟回顧，以及一些事件的衝擊，我開始更確定自己的一些大方向規劃，以及想做什麼事情，可能想往什麼方向走，而其中一個部分就是透過文字，將自己的經驗、學習轉化並且分享出來。<br />
+						預計分享的內容，像是在這疑難雜症的經驗中所帶來的體悟，以及所做的一些學習心得。最近在研究習慣、心念、大腦等等相關領域，也有閱讀一些身心靈書籍跟阿育吠陀等知識。如果這些分享能為你帶來一些小小心得，也歡迎給我一些回饋。
+					</p>
+					<p class="text-lighter">
+						（目前我的狀況已經好上許多，距離回到正常的生活型態只剩下一個關卡，而這個關卡的突破，我知道是遲早的事情，只需要再一些時間！）
+					</p>
+				</div>
+				<!-- Social Links -->
+				<div class="mt-6 flex items-center gap-4">
+					<a
+						href="https://www.instagram.com/billyji2024/"
+						target="_blank"
+						rel="noreferrer"
+						class="flex items-center gap-1.5 text-sm text-lighter border border-color-200 rounded-full px-3 py-1.5 hover:text-accent-two hover:border-accent-two transition-colors"
+						aria-label="Instagram"
+					>
+						<Icon class="h-5 w-5" name="mdi:instagram" />
+						<span>Instagram</span>
+					</a>
+					<a
+						href="https://podcasts.apple.com/"
+						target="_blank"
+						rel="noreferrer"
+						class="flex items-center gap-1.5 text-sm text-lighter border border-color-200 rounded-full px-3 py-1.5 hover:text-accent-two hover:border-accent-two transition-colors"
+						aria-label="Podcast"
+					>
+						<Icon class="h-5 w-5" name="mdi:podcast" />
+						<span>Podcast</span>
+					</a>
+				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 
 	<!-- Posts Section -->
-	<section aria-label="Blog post list" class="'mt-[-100vh] pt-[100vh]'">
-		<h2 class="title mb-6 text-xl text-accent-two">
-			<a href="/posts/">Posts</a>
+	<section aria-label="Blog post list">
+		<h2 class="title mb-4 text-xl flex items-center justify-between">
+			<a class="hover:text-accent-two transition-colors" href="/posts/">文章</a>
+			<a class="text-sm font-normal text-lighter hover:text-accent-base transition-colors" href="/posts/">
+				查看全部 →
+			</a>
 		</h2>
-		<ul class="space-y-4 md:space-y-2" role="list">
+		<ul class="space-y-4" role="list">
 			{
 				allPostsByDate.map((p) => (
-					<li class="gap-2 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
+					<li class="relative bg-color-75 rounded-lg px-4 md:px-8 py-3 md:py-4 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+						<PostPreview post={p} withDesc={true} />
 					</li>
 				))
 			}
 		</ul>
 	</section>
-
-	<!-- Notes Section -->
-	{
-		latestNotes.length > 0 && (
-			<section class="mt-12">
-				<h2 class="title mb-6 text-accent-two">
-					<a href="/notes/">Notes</a>
-				</h2>
-				<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-					{
-						latestNotes.map((note) => (
-							<div>
-								<Note note={note} as="h4" isPreview />
-							</div>
-						))
-					}
-				</div>
-			</section>
-		)
-	}
-
-	<!-- Debug -->
-	<!--
-	<div class="flex justify-between flex-wrap gap-y-1.5 mt-6 text-sm font-medium">
-		<div class="text-center content-center h-10 w-10 bg-color-50"><span class="text-textColor">50</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-75"><span class="text-textColor">75</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-100"><span class="text-textColor">100</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-150"><span class="text-textColor">150</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-200"><span class="text-textColor">200</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-250"><span class="text-textColor">250</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-300"><span class="text-textColor">300</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-350"><span class="text-textColor">350</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-400">
-			<span class="text-textColor">400</span>
-			<span class="text-bgColor">400</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-450">
-			<span class="text-textColor">450</span>
-			<span class="text-bgColor">450</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-500">
-			<span class="text-textColor">500</span>
-			<span class="text-bgColor">500</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-550"><span class="text-bgColor">550</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-600"><span class="text-bgColor">600</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-650"><span class="text-bgColor">650</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-700"><span class="text-bgColor">700</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-750"><span class="text-bgColor">750</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-800"><span class="text-bgColor">800</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-850"><span class="text-bgColor">850</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-900"><span class="text-bgColor">900</span></div>
-	</div>
-	-->
 </PageLayout>
-

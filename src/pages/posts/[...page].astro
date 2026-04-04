@@ -63,10 +63,10 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		<section aria-label="Blog post list" class="grow">
 			{
 				descYearKeys.map((yearKey) => (
-					<ul class="mb-8 mt-4 space-y-8 text-start">
-						{/* <h4 class="title">{yearKey}</h4> */}
+					<ul class="mb-8 mt-4 space-y-4 text-start">
+						<h4 class="text-sm text-lighter font-medium mb-4">{yearKey}</h4>
             {groupedByYear[yearKey]?.map((p) => (
-              <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2 bg-color-75 rounded-lg px-4 md:px-8 py-2 md:py-4">
+              <li class="relative grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2 bg-color-75 border border-color-200 rounded-lg px-4 md:px-8 py-2 md:py-4 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
                 <PostPreview post={p} withDesc={true} />
               </li>
             ))}

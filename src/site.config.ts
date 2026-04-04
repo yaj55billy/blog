@@ -19,25 +19,25 @@ export const siteConfig: SiteConfig = {
 	// Meta property, found in src/components/BaseHead.astro L:42
 	ogLocale: "zh_TW",
 	// Used to construct the meta title property found in src/components/BaseHead.astro L:11, and webmanifest name found in astro.config.ts L:42
-	title: "探索與記錄的產地",
+	title: "圓臉助教的第二人生",
 };
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: { path: string; title: string }[] = [
 	{
 		path: "/",
-		title: "Home",
+		title: "首頁",
 	},
-	{
-		path: "/about/",
-		title: "About",
-	},
-	{
+{
 		path: "/posts/",
-		title: "Blog",
+		title: "文章",
 	},
 	{
-		path: "/notes/",
-		title: "Notes",
+		path: "/essays/",
+		title: "隨筆",
+	},
+	{
+		path: "/podcast/",
+		title: "Podcast",
 	},
 ];

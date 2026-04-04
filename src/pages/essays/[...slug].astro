@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+
+import Note from "@/components/note/Note.astro";
+import PageLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+// If you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
+export const getStaticPaths = (async () => {
+	const allNotes = await getCollection("note");
+	return allNotes.map((note) => ({
+		params: { slug: note.id },
+		props: { note },
+	}));
+}) satisfies GetStaticPaths;
+
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { note } = Astro.props;
+
+const meta = {
+	description:
+		note.data.description ||
+		`Read about my note posted on: ${note.data.publishDate.toLocaleDateString()}`,
+	title: note.data.title,
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="fixed left-0 top-0 z-10 flex h-16 md:h-20 w-full bg-bgColor shadow-sm">
+		<div
+			id="note-title-bar"
+			class="m-auto max-w-5xl w-full px-4 md:px-8 flex items-center opacity-0 transition-opacity duration-300"
+		>
+			<span class="text-sm font-semibold text-accent-base truncate">{note.data.title}</span>
+		</div>
+	</div>
+	<a
+		class="citrus-link mb-6 inline-flex items-center gap-1 text-sm text-lighter hover:text-accent-base"
+		href="/essays/"
+	>
+		← 返回記錄
+	</a>
+	<Note as="h1" note={note} />
+</PageLayout>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const titleBar = document.getElementById("note-title-bar");
+		const h1 = document.querySelector("h1");
+
+		if (titleBar && h1) {
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					titleBar.style.opacity = entry.isIntersecting ? "0" : "1";
+				},
+				{ rootMargin: "-80px 0px 0px 0px" }
+			);
+			observer.observe(h1);
+		}
+	});
+</script>

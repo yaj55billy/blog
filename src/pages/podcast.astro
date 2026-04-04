@@ -1,0 +1,73 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const episodes = [
+	{
+		id: "cmlnfzfne00sw01u53im5bulr",
+		title: "EP11",
+	},
+	{
+		id: "cml4we9tb016t01zxeruw4i3o",
+		title: "EP10",
+	},
+	{
+		id: "cmk6maxbi008d01wm4qzw6rjw",
+		title: "EP9",
+	},
+	{
+		id: "cmj9exlth000301uz7xiyh6qb",
+		title: "EP8",
+	},
+	{
+		id: "cmilku4eo00qf01yvc2kjhtmh",
+		title: "EP7",
+	},
+	{
+		id: "cmi8m54q101ax01xoaxu0c76z",
+		title: "EP6",
+	},
+	{
+		id: "cmi02vlqq00o401x85zwafu5n",
+		title: "EP5",
+	},
+	{
+		id: "cmhpotrep005s01wcaykb0exc",
+		title: "EP4",
+	},
+	{
+		id: "cmhfl5ul2017l01vued0qc7mt",
+		title: "EP3",
+	},
+	{
+		id: "cmh3ey09l00ei01w64ljhc4i1",
+		title: "EP2",
+	},
+	{
+		id: "cmgwaoy7101ht01uw6h7b2bm9",
+		title: "EP1",
+	},
+];
+---
+
+<PageLayout meta={{ title: "Podcast" }}>
+	<section>
+		<h1 class="title mb-8 text-2xl">Podcast</h1>
+		<ul class="space-y-6" role="list">
+			{
+				episodes.map((ep) => (
+					<li class="bg-color-75 rounded-lg px-4 py-4">
+						<iframe
+							title={`Firstory ${ep.title}`}
+							src={`https://open.firstory.me/embed/story/${ep.id}`}
+							height="180"
+							width="100%"
+							frameborder="0"
+							scrolling="no"
+							loading="lazy"
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</PageLayout>

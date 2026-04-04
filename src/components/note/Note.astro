@@ -13,13 +13,16 @@ const { Content } = await render(note);
 ---
 
 <article
-	class:list={[isPreview && "inline-grid w-full rounded-lg bg-color-75 px-4 md:px-8 py-2 md:py-4"]}
+	class:list={[isPreview && "relative isolate grid w-full rounded-lg bg-color-75 border border-color-200 px-4 md:px-8 py-4 md:py-6 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"]}
 	data-pagefind-body={isPreview ? false : true}
 >
-	<Tag class="flex items-end title md:sticky md:top-8 md:z-10" class:list={{ "text-base": isPreview }}>
+	<Tag
+		class="flex items-end title"
+		class:list={{ "text-base": isPreview }}
+	>
 		{
 			isPreview ? (
-				<a class="citrus-link" href={`/notes/${note.id}/`}>
+				<a class="after:absolute after:inset-0 after:z-[1]" href={`/essays/${note.id}/`}>
 					{note.data.title}
 				</a>
 			) : (
@@ -27,11 +30,10 @@ const { Content } = await render(note);
 			)
 		}
 	</Tag>
-	<div 
-		class="flex items-end h-6 text-sm text-lighter"
-		class:list={{ "mt-4": !isPreview }}
+	<div
+		class="flex items-center h-6 text-sm text-lighter"
+		class:list={{ "mt-3": !isPreview, "mt-2": isPreview }}
 	>
-		
 		<FormattedDate
 			dateTimeOptions={{
 				year: "numeric",
@@ -41,16 +43,33 @@ const { Content } = await render(note);
 			date={note.data.publishDate}
 		/>
 	</div>
-	<div
-		class="prose prose-citrus mt-4 max-w-none [&>p:last-of-type]:mb-0"
-		class:list={{
-			"line-clamp-4": isPreview,
-			"[&>blockquote]:line-clamp-4 [&>blockquote]:mb-0": isPreview,
-			"[&>blockquote:not(:first-of-type)]:hidden": isPreview,
-			// "[&>p]:line-clamp-4": isPreview,
-			// "[&>p:not(:first-of-type)]:hidden": isPreview,
-		}} 
-	>
-		<Content />
-	</div>
+	{!isPreview && <hr class="mt-4 border-color-200" />}
+	{isPreview ? (
+		note.data.description ? (
+			<p class="mt-3 text-sm text-lighter line-clamp-3">{note.data.description}</p>
+		) : (
+			<div class="prose prose-sm prose-citrus mt-3 max-w-none [&>p:last-of-type]:mb-0 line-clamp-3 [&>blockquote]:line-clamp-3 [&>blockquote]:mb-0 [&>blockquote:not(:first-of-type)]:hidden">
+				<Content />
+			</div>
+		)
+	) : (
+		<div class="prose prose-citrus mt-4 max-w-none [&>p:last-of-type]:mb-0">
+			<Content />
+		</div>
+	)}
+	{!isPreview && (
+		<footer class="mt-10 pt-6 border-t border-color-200 flex items-center justify-between text-sm">
+			<a
+				class="citrus-link text-lighter hover:text-accent-base"
+				href="/essays/"
+			>
+				← 返回記錄
+			</a>
+			<FormattedDate
+				class="text-lighter"
+				dateTimeOptions={{ year: "numeric", month: "long", day: "2-digit" }}
+				date={note.data.publishDate}
+			/>
+		</footer>
+	)}
 </article>

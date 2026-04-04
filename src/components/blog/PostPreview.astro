@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "@/components/FormattedDate.astro";
 import type { HTMLTag, Polymorphic } from "astro/types";
+import { Image } from "astro:assets";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	post: CollectionEntry<"post">;
@@ -11,7 +12,7 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
 ---
 
-<div class={withDesc ? "flex flex-col" : "flex flex-col grow sm:flex-row sm:items-center sm:justify-between"}>
+<div class={withDesc ? "flex gap-4 items-start" : "flex flex-col grow sm:flex-row sm:items-center sm:justify-between"}>
 	{!withDesc ? (
 		<>
 			<Tag class="citrus-link font-medium text-accent-base h4 sm:order-1 sm:flex-gro md:line-clamp-1">
@@ -32,21 +33,32 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 		</>
 	) : (
 		<>
-			<Tag class="citrus-link font-medium text-accent-base h4">
-				<a data-astro-prefetch href={`/posts/${post.id}/`}>
-					{post.data.title}
-				</a>
-			</Tag>
-      <FormattedDate 
-				class="text-sm shrink-0 text-lighter mt-2 mb-2" 
-				date={post.data.publishDate}
-				dateTimeOptions={{
-					year: "numeric",
-					month: "long",
-					day: "2-digit",
-				}}
-			/>
-			<p class="mt-0.5 line-clamp-2">{post.data.description}</p>
+			<div class="flex-1 min-w-0 flex flex-col">
+				<Tag class="citrus-link font-medium text-accent-base h4">
+					<a data-astro-prefetch href={`/posts/${post.id}/`} class="after:absolute after:inset-0">
+						{post.data.title}
+					</a>
+				</Tag>
+				<FormattedDate
+					class="text-sm shrink-0 text-lighter mt-2 mb-2"
+					date={post.data.publishDate}
+					dateTimeOptions={{
+						year: "numeric",
+						month: "long",
+						day: "2-digit",
+					}}
+				/>
+				<p class="mt-0.5 line-clamp-2">{post.data.description}</p>
+			</div>
+			{post.data.coverImage && (
+				<Image
+					src={post.data.coverImage.src}
+					alt={post.data.coverImage.alt}
+					width={200}
+					height={140}
+					class="rounded-md object-cover w-20 h-14 sm:w-48 sm:h-32 shrink-0"
+				/>
+			)}
 		</>
 	)}
 </div>
