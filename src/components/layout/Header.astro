@@ -13,7 +13,7 @@ import { Icon } from "astro-icon/components";
 			TODO: This approach is not optimal and requires improvements. 
   			- Too many absolutely positioned elements can affect performance. 
   		-->	
-	<div class="md:hidden absolute top-0 left-1/2 -ml-[50vw] w-screen min-h-screen pointer-events-none blur-2xl">
+	<div class="hidden dark:block md:hidden absolute top-0 left-1/2 -ml-[50vw] w-screen min-h-screen pointer-events-none blur-2xl">
 		<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
 		<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
 		<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
@@ -43,7 +43,7 @@ import { Icon } from "astro-icon/components";
 			</a>
 			<nav
 				aria-label="Main menu"
-				class="top-20 text-md hidden flex-col items-end justify-center gap-x-4 rounded-md bg-bgColor font-medium text-accent-two shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:flex-row sm:items-center sm:rounded-none sm:bg-transparent sm:shadow-none sm:backdrop-blur-none md:flex"
+				class="top-20 text-md hidden flex-col items-end justify-center gap-x-4 rounded-md bg-bgColor font-medium text-accent-two shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:flex-row sm:items-center sm:rounded-none sm:bg-transparent sm:shadow-none sm:backdrop-blur-none md:flex ml-6"
 				id="main-navigation-menu"
 			>	
 				<!--				
@@ -145,12 +145,12 @@ import { Icon } from "astro-icon/components";
 			-->
 
       <!-- 搜尋功能、切換淺色深色背景 -->
-			<!-- <div class="ml-auto hidden xs:block">
+			<div class="ml-auto hidden xs:block">
 				<div id="buttons-panel" class="top-4 md:top-8 -ml-[4.5rem] flex space-x-2">
 					<Search />
 					<ThemeToggle />
 				</div>
-			</div>	 -->
+			</div>
 			
 			<mobile-button
 				aria-expanded="false"
