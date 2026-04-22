@@ -1,50 +1,50 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+此檔案提供 Claude Code (claude.ai/code) 在此儲存庫中工作時的指引。
 
-## Commands
+## 指令
 
 ```bash
-pnpm dev          # Start dev server (host: true, so accessible on LAN)
-pnpm build        # Build production site to ./dist/
-pnpm postbuild    # Run pagefind indexer after build (required for search)
-pnpm preview      # Preview production build locally
-pnpm lint         # Biome lint
-pnpm format       # Full format (biome format + prettier + import sorting)
-pnpm check        # Astro type check
+pnpm dev          # 啟動開發伺服器（host: true，可在區域網路存取）
+pnpm build        # 將正式環境網站建置至 ./dist/
+pnpm postbuild    # 建置後執行 pagefind 索引器（搜尋功能必須執行此步驟）
+pnpm preview      # 在本地預覽正式環境建置結果
+pnpm lint         # Biome 程式碼檢查
+pnpm format       # 完整格式化（biome format + prettier + import 排序）
+pnpm check        # Astro 型別檢查
 ```
 
-Pagefind search only works after a full `build && postbuild` — it has no dev-mode equivalent.
+Pagefind 搜尋功能僅在完整執行 `build && postbuild` 後才能運作，開發模式下無法使用。
 
-## Architecture
+## 架構
 
-This is an **Astro v5** blog (based on the Astro Citrus template) deployed to Netlify. The site is in Traditional Chinese (zh-TW) and lives at `https://www.billyji.com/`.
+這是一個 **Astro v5** 部落格（基於 Astro Citrus 模板），部署於 Netlify。網站使用繁體中文（zh-TW），網址為 `https://www.billyji.com/`。
 
-### Content Collections
+### 內容集合
 
-Three collections defined in `src/content.config.ts`:
+三個集合定義於 `src/content.config.ts`：
 
-- **post** — `src/content/post/` — full blog posts. Each post is a folder with `index.md` (or `.mdx`) and any accompanying images. Key frontmatter: `title`, `description`, `publishDate`, `tags`, `draft`, `coverImage`, `ogImage`, `seriesId`, `orderInSeries`.
-- **note** — `src/content/note/` — shorter notes. Can be a single `.md` file or a folder.
-- **series** — `src/content/series/` — groups posts by `seriesId`. A series file has `id`, `title`, `description`, `featured`.
+- **post** — `src/content/post/` — 完整的部落格文章。每篇文章為一個資料夾，包含 `index.md`（或 `.mdx`）及相關圖片。主要 frontmatter：`title`、`description`、`publishDate`、`tags`、`draft`、`coverImage`、`ogImage`、`seriesId`、`orderInSeries`。
+- **note** — `src/content/note/` — 較短的隨筆。可以是單一 `.md` 檔案或資料夾。
+- **series** — `src/content/series/` — 透過 `seriesId` 將文章分組成系列。系列檔案包含 `id`、`title`、`description`、`featured`。
 
-`draft: true` posts are excluded from production builds, RSS, OG images, and all `getAllPosts()` calls.
+`draft: true` 的文章會從正式環境建置、RSS、OG 圖片及所有 `getAllPosts()` 呼叫中排除。
 
-### Key Source Paths
+### 重要原始碼路徑
 
-- `src/site.config.ts` — site metadata (`author`, `title`, `description`, `lang`) and `menuLinks`.
-- `src/styles/global.css` — CSS variables for light/dark themes.
-- `src/plugins/` — two custom remark plugins: `remark-reading-time.ts` and `remark-admonitions.ts` (handles `:::note`, `:::tip`, etc. directives).
-- `src/pages/og-image/[slug].png.ts` — Satori-based OG image generation per post.
-- `src/pages/rss.xml.ts` — RSS feed.
+- `src/site.config.ts` — 網站後設資料（`author`、`title`、`description`、`lang`）與 `menuLinks`。
+- `src/styles/global.css` — 亮色／暗色主題的 CSS 變數。
+- `src/plugins/` — 兩個自訂 remark 插件：`remark-reading-time.ts` 與 `remark-admonitions.ts`（處理 `:::note`、`:::tip` 等指令語法）。
+- `src/pages/og-image/[slug].png.ts` — 基於 Satori 的每篇文章 OG 圖片產生器。
+- `src/pages/rss.xml.ts` — RSS 訂閱。
 
-### Markdown Pipeline
+### Markdown 處理流程
 
-Syntax highlighting uses **rehype-pretty-code** (Shiki), with `rose-pine` (dark) and `rose-pine-dawn` (light) themes. Changing the theme requires a dev server restart. Admonitions use `:::type` directive syntax via `remark-directive` + the custom `remarkAdmonitions` plugin.
+語法高亮使用 **rehype-pretty-code**（Shiki），主題為 `rose-pine`（暗色）和 `rose-pine-dawn`（亮色）。更換主題後需要重新啟動開發伺服器。提示區塊（Admonitions）透過 `remark-directive` 搭配自訂 `remarkAdmonitions` 插件，使用 `:::type` 指令語法。
 
-### Tooling
+### 工具鏈
 
-- **Biome** — linting and formatting for non-Astro files (tabs, indent width 2, line width 100).
-- **Prettier** — formatting for `.astro` files and others not covered by Biome.
-- **Pagefind** — static search, scoped to `data-pagefind-body` elements in `BlogPost.astro` and `Note.astro`.
-- **pnpm** — package manager (see `pnpm-lock.yaml`).
+- **Biome** — 非 Astro 檔案的程式碼檢查與格式化（tabs、縮排寬度 2、行寬 100）。
+- **Prettier** — `.astro` 檔案及其他 Biome 未涵蓋檔案的格式化。
+- **Pagefind** — 靜態搜尋，範圍限定於 `BlogPost.astro` 和 `Note.astro` 中的 `data-pagefind-body` 元素。
+- **pnpm** — 套件管理器（參見 `pnpm-lock.yaml`）。
