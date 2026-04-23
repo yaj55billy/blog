@@ -20,6 +20,7 @@
     "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "5.1.4",
     "@shikijs/transformers": "^1.25.1",
+    "@waline/client": "^3.13.0",
     "astro": "5.1.2",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
@@ -60,6 +61,10 @@
     "typescript": "^5.7.2"
   },
   "pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "sharp"]
-	}
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild",
+      "sharp"
+    ]
+  }
 }

@@ -1,0 +1,22 @@
+---
+import { WALINE_SERVER_URL } from "astro:env/client";
+---
+
+{WALINE_SERVER_URL && (
+  <section class="mt-10 pt-6 border-t border-color-200">
+    <div id="waline" data-server-url={WALINE_SERVER_URL}></div>
+  </section>
+)}
+
+<script>
+  const walineEl = document.getElementById("waline") as HTMLElement | null;
+  if (walineEl) {
+    const serverURL = walineEl.dataset.serverUrl;
+    if (serverURL) {
+      import("@waline/client").then(({ init }) => {
+        import("@waline/client/style");
+        init({ el: "#waline", serverURL });
+      });
+    }
+  }
+</script>

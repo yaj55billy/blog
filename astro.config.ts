@@ -147,6 +147,11 @@ export default defineConfig({
 				access: "public",
 				optional: true,
 			}),
+			WALINE_SERVER_URL: envField.string({
+				context: "client",
+				access: "public",
+				optional: true,
+			}),
 		},
 	},
 	server: {
