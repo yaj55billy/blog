@@ -1,17 +1,18 @@
 ---
-import { type CollectionEntry } from "astro:content";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import { getAllPosts } from "@/data/post";
+// import { type CollectionEntry } from "astro:content";
+// import PostPreview from "@/components/blog/PostPreview.astro";
+// import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
+// import { collectionDateSort } from "@/utils/date";
 import { Icon } from "astro-icon/components";
+import WalineComment from "@/components/blog/WalineComment.astro";
 
 // Posts
-const MAX_POSTS = 3;
-const allPosts = await getAllPosts();
-const allPostsByDate = allPosts
-	.sort(collectionDateSort)
-	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
+// const MAX_POSTS = 3;
+// const allPosts = await getAllPosts();
+// const allPostsByDate = allPosts
+// 	.sort(collectionDateSort)
+// 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
 ---
 
 <PageLayout meta={{ title: "Home" }}>
@@ -79,8 +80,18 @@ const allPostsByDate = allPosts
 		</div>
 	</section>
 
-	<!-- Posts Section -->
-	<section aria-label="Blog post list">
+	<!-- 誰來我家 Section -->
+	<section>
+		<h2 class="title mb-2 text-xl">誰來我家</h2>
+		<p class="text-lighter mb-6 leading-relaxed">
+			歡迎留下你的足跡唷～<br/>
+      不論只是單純打招呼、或者交流分享，都非常歡迎～～
+		</p>
+		<WalineComment />
+	</section>
+
+	<!-- Posts Section (暫時停用) -->
+	{/* <section aria-label="Blog post list">
 		<h2 class="title mb-4 text-xl flex items-center justify-between">
 			<a class="hover:text-accent-two transition-colors" href="/posts/">文章</a>
 			<a class="text-sm font-normal text-lighter hover:text-accent-base transition-colors" href="/posts/">
@@ -96,5 +107,5 @@ const allPostsByDate = allPosts
 				))
 			}
 		</ul>
-	</section>
+	</section> */}
 </PageLayout>
